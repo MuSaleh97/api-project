@@ -40,7 +40,11 @@ public class FeaturesFacade {
 
         long hours = nextPrayer.getTimeRemaining().toHours();
         long minutes = nextPrayer.getTimeRemaining().minusHours(hours).toMinutes();
-        long seconds = nextPrayer.getTimeRemaining().minusHours(hours).toSeconds();
+        long seconds = nextPrayer.getTimeRemaining()
+                .minusHours(hours)
+                .minusMinutes(minutes)
+                .toSeconds();
+
         String timeRemainingForTheNextPrayer = String.format("%02d:%02d:%02d", hours, minutes, seconds);
 
         return AdhanResponse.builder()
