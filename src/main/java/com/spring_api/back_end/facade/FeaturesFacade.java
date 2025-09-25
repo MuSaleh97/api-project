@@ -72,7 +72,9 @@ public class FeaturesFacade {
             throw new IllegalArgumentException("Invalid region: " + region);
         }
 
-        LocalTime now = LocalTime.now(zoneId);
+        LocalDate today = LocalDate.now(zoneId);
+        LocalTime nowTime = LocalTime.now(zoneId);
+        LocalDateTime now = LocalDateTime.of(today, nowTime);
 
         Map<String, LocalTime> prayerTimes = new LinkedHashMap<>();
         prayerTimes.put("Fajr", LocalTime.parse(fajr, timeFormatter));
@@ -83,17 +85,16 @@ public class FeaturesFacade {
         prayerTimes.put("Isha", LocalTime.parse(isha, timeFormatter));
 
         for (Map.Entry<String, LocalTime> entry : prayerTimes.entrySet()) {
-            LocalTime prayerTime = entry.getValue();
-            if (!now.isAfter(prayerTime)) {
-                Duration remaining = Duration.between(now, prayerTime);
+            LocalDateTime prayerDateTime = LocalDateTime.of(today, entry.getValue());
+            if (!now.isAfter(prayerDateTime)) {
+                Duration remaining = Duration.between(now, prayerDateTime);
                 return new NextPrayerInfo(entry.getKey(), remaining);
             }
         }
 
-        LocalTime tomorrowFajr = LocalTime.parse(fajr, timeFormatter);
-        Duration untilMidnight = Duration.between(now, LocalTime.MIDNIGHT);
-        Duration afterMidnightToFajr = Duration.between(LocalTime.MIN, tomorrowFajr);
-        Duration total = untilMidnight.plus(afterMidnightToFajr);
+        LocalDate tomorrow = today.plusDays(1);
+        LocalDateTime tomorrowFajr = LocalDateTime.of(tomorrow, LocalTime.parse(fajr, timeFormatter));
+        Duration total = Duration.between(now, tomorrowFajr);
 
         return new NextPrayerInfo("Fajr", total);
     }
