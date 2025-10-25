@@ -7,10 +7,11 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum Dictionary {
     // Jordan
-    AMMAN("Amman", "عمان"),
     JORDAN("Jordan", "الأردن"),
+    AMMAN("Amman", "عمان"),
     IRBID("Irbid", "إربد"),
-    ZARQA("Zarqa", "الزرقاء"),
+    ZARQA("Al Zarqa", "الزرقاء"),
+    AL_ZARQA("Zarqa", "الزرقاء"),
     AQABA("Aqaba", "العقبة"),
     SALT("Salt", "السلط"),
     MADABA("Madaba", "مادبا"),
