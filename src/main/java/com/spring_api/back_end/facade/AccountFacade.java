@@ -86,8 +86,8 @@ public class AccountFacade {
 
     private Account findAccountByEmailOrPhoneIsDeleted(String emailOrPhone) {
         Optional<Account> optional = emailOrPhone.contains("@")
-                ? service.findByEmailOrderByIdDesc(emailOrPhone)
-                : service.findByPhoneOrderByIdDesc(emailOrPhone);
+                ? service.findByEmailAndIsDeleted(emailOrPhone, false)
+                : service.findByPhoneAndIsDeleted(emailOrPhone, false);
 
         return optional.orElseThrow(LoginException::new);
     }
