@@ -1,0 +1,383 @@
+/* Registration Page Styles */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #f8f6f0 0%, #ede8dc 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Background texture and watermark - matching login page */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    right: -50px;
+    width: 250px;
+    height: 100vh;
+    background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ddd5c7' fill-opacity='0.15'%3E%3Cpath d='M50 50c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm-30 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: repeat;
+    opacity: 0.6;
+    z-index: -1;
+}
+
+/* Decorative shapes - matching login page */
+.decorative-shape {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(45deg, #F6D47B 0%, #B57C2A 100%);
+    opacity: 0.08;
+    z-index: -1;
+    transform: rotate(45deg);
+    border-radius: 20px;
+}
+
+.decorative-shape.top-left {
+    top: 8%;
+    left: 4%;
+    animation: float 6s ease-in-out infinite;
+}
+
+.decorative-shape.bottom-left {
+    bottom: 12%;
+    left: 6%;
+    animation: float 8s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+    0%, 100% { transform: rotate(45deg) translateY(0px); }
+    50% { transform: rotate(45deg) translateY(-8px); }
+}
+
+.registration-container {
+    width: 100%;
+    max-width: 360px; /* Reduced from 420px */
+    padding: 12px; /* Reduced from 16px */
+}
+
+.registration-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+    padding: 20px 14px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 24px; /* Reduced from 32px */
+}
+
+.header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px; /* Reduced from 28px */
+    font-weight: 600;
+    color: #111;
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.registration-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Reduced from 16px */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px 14px; /* Reduced from 14px 16px */
+    border: 1px solid #C9CBD6;
+    border-radius: 10px; /* Reduced from 12px */
+    font-size: 15px; /* Reduced from 16px */
+    font-family: 'Inter', sans-serif;
+    background: rgba(230, 225, 240, 0.3);
+    color: #111;
+    transition: all 0.3s ease;
+    outline: none;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.form-group input::placeholder {
+    color: #8F93A3;
+    font-weight: 400;
+}
+
+.form-group select {
+    color: #8F93A3;
+    cursor: pointer;
+}
+
+.form-group select option {
+    color: #111;
+    background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #7AA7FF;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 0 2px #7AA7FF, inset 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+/* Date input styling */
+.form-group input[type="date"] {
+    color: #8F93A3;
+}
+
+.form-group input[type="date"]:focus,
+.form-group input[type="date"]:valid {
+    color: #111;
+}
+
+.form-group input:valid,
+.form-group select:valid {
+    border-color: #4CAF50;
+}
+
+.form-group input:invalid:not(:placeholder-shown),
+.form-group select:invalid:not(:placeholder-shown) {
+    border-color: #E53935;
+    background: rgba(229, 57, 53, 0.05);
+}
+
+.error-message {
+    color: #E53935;
+    font-size: 14px;
+    margin-top: -8px;
+    margin-bottom: 8px;
+    text-align: center;
+    min-height: 20px;
+    font-weight: 500;
+}
+
+.primary-button {
+    background: linear-gradient(90deg, #F6D47B 0%, #B57C2A 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 16px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 16px rgba(181, 124, 42, 0.3);
+}
+
+.primary-button:hover {
+    background: linear-gradient(90deg, #F4D069 0%, #A86F25 100%);
+    box-shadow: 0 10px 30px rgba(181, 124, 42, 0.4);
+}
+
+.primary-button:active {
+    box-shadow: 0 5px 15px rgba(181, 124, 42, 0.3);
+}
+
+.primary-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 14px;
+    color: #666;
+}
+
+.login-link a {
+    color: #B57C2A;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.login-link a:hover {
+    color: #8B5A1F;
+    text-decoration: underline;
+}
+
+/* Loading state */
+.loading .primary-button {
+    position: relative;
+    color: transparent;
+}
+
+.loading .primary-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid transparent;
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Success state */
+.success .form-group input,
+.success .form-group select {
+    border-color: #4CAF50;
+    background: rgba(76, 175, 80, 0.05);
+}
+
+.success .primary-button {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+}
+
+/* Error state */
+.error .form-group input.invalid,
+.error .form-group select.invalid {
+    border-color: #E53935;
+    background: rgba(229, 57, 53, 0.05);
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+    .registration-container {
+        padding: 8px;
+    }
+
+    .registration-card {
+        padding: 20px 12px;
+        border-radius: 16px;
+    }
+
+    .header h1 {
+        font-size: 22px;
+    }
+
+    .form-group input,
+    .form-group select {
+        padding: 12px 14px;
+        font-size: 15px;
+    }
+
+    .primary-button {
+        padding: 14px 20px;
+        font-size: 15px;
+    }
+
+    body::before {
+        right: -150px;
+        width: 200px;
+    }
+
+    .decorative-shape {
+        width: 70px;
+        height: 70px;
+        border-radius: 16px;
+    }
+}
+
+/* Tablet responsiveness */
+@media (min-width: 481px) and (max-width: 768px) {
+    .registration-container {
+        max-width: 380px;
+    }
+
+    .header h1 {
+        font-size: 26px;
+    }
+}
+
+/* Form validation animations */
+.form-group input.valid {
+    border-color: #4CAF50;
+    animation: validPulse 0.3s ease;
+}
+
+.form-group input.invalid {
+    border-color: #E53935;
+    animation: invalidShake 0.3s ease;
+}
+
+@keyframes validPulse {
+    0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4); }
+    100% { box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
+}
+
+@keyframes invalidShake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+    20%, 40%, 60%, 80% { transform: translateX(2px); }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .registration-card {
+        border: 2px solid #000;
+        background: white;
+    }
+
+    .form-group input,
+    .form-group select {
+        border: 2px solid #000;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Print styles */
+@media print {
+    body {
+        background: white;
+    }
+
+    body::before {
+        display: none;
+    }
+
+    .registration-card {
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+}

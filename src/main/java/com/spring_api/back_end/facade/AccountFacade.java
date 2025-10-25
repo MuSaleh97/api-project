@@ -111,6 +111,8 @@ public class AccountFacade {
                 .password(AESUtil.encrypt(request.getPassword(), secretKey))
                 .isDeleted(false)
                 .isActive(true)
+                .verifyEmail(false)
+                .verifyPhone(false)
                 .secretKey(secretKey)
                 .build();
     }

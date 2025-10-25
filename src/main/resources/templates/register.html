@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration - Prayer Times App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/register.css">
+</head>
+<body>
+    <!-- Decorative shapes -->
+    <div class="decorative-shape top-left"></div>
+    <div class="decorative-shape bottom-left"></div>
+
+    <div class="registration-container">
+        <div class="registration-card">
+            <div class="header">
+                <h1>Registration 👨🏻‍🦱</h1>
+            </div>
+
+            <form id="registrationForm" class="registration-form">
+                <div class="form-group">
+                    <input type="text" id="fullName" name="fullName" placeholder="Full Name" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="Email Address" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+                </div>
+
+                <div class="form-group">
+                    <select id="gender" name="gender" required>
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="MALE">Male</option>
+                        <option value="FEMALE">Female</option>
+                        <option value="OTHER">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <input type="date" id="dob" name="dob" placeholder="Date of Birth" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+                </div>
+
+                <div class="error-message" id="errorMessage"></div>
+
+                <button type="submit" class="primary-button">Sign Up</button>
+
+                <div class="login-link">
+                    Already have an account? <a href="/login">Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/register.js"></script>
+</body>
+</html>
+
