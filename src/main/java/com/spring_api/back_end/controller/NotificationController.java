@@ -14,7 +14,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(
+        originPatterns = "*",
+        allowedHeaders = "*",
+        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS},
+        allowCredentials = "true",
+        maxAge = 3600
+)
 @RestController
 @RequestMapping("/api/notifications")
 @RequiredArgsConstructor

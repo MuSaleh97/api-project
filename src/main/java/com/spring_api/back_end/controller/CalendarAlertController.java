@@ -19,7 +19,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(
+        originPatterns = "*",
+        allowedHeaders = "*",
+        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS},
+        allowCredentials = "true",
+        maxAge = 3600
+)
 @RestController
 @RequestMapping("/api/calendar-alerts")
 @RequiredArgsConstructor

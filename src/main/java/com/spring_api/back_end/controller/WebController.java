@@ -28,6 +28,6 @@ public class WebController {
 
     @GetMapping("/")
     public String homePage() {
-        return "redirect:/login"; // Redirect to login instead of registration
+        return "redirect:/login";
     }
 }
