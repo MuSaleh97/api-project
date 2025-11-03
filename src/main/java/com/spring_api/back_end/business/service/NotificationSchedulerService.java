@@ -5,6 +5,8 @@ import com.spring_api.back_end.data.entity.Notification;
 import com.spring_api.back_end.data.enums.AlertStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +17,28 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@ConditionalOnProperty(value = "notification.scheduler.enabled", havingValue = "true", matchIfMissing = true)
 public class NotificationSchedulerService {
 
     private final CalendarAlertService calendarAlertService;
     private final NotificationService notificationService;
 
-    @Scheduled(fixedRate = 60000) // Run every minute
+    @Value("${notification.scheduler.fixed-rate:300000}")
+    private long fixedRate;
+
+    @Scheduled(fixedRateString = "${notification.scheduler.fixed-rate:300000}",
+               initialDelayString = "${notification.scheduler.initial-delay:60000}")
     public void processAlerts() {
-        log.info("Processing alerts at: {}", LocalDateTime.now());
+        log.debug("Processing alerts at: {}", LocalDateTime.now());
+
+        // First check if there are any alerts due to avoid unnecessary queries
+        long alertCount = calendarAlertService.countActiveAlertsDueForNotification();
+        if (alertCount == 0) {
+            log.debug("No alerts due for notification at this time");
+            return;
+        }
+
+        log.info("Found {} alerts due for notification at {}", alertCount, LocalDateTime.now());
 
         List<CalendarAlert> dueAlerts = calendarAlertService.findActiveAlertsDueForNotification();
 

@@ -55,6 +55,10 @@ public class CalendarAlertService {
         return repository.findActiveAlertsDueForNotification(LocalDateTime.now(), AlertStatus.ACTIVE);
     }
 
+    public long countActiveAlertsDueForNotification() {
+        return repository.countActiveAlertsDueForNotification(LocalDateTime.now(), AlertStatus.ACTIVE);
+    }
+
     public List<CalendarAlert> findAlertsByEmailAndTimeRange(String email, LocalDateTime startTime, LocalDateTime endTime) {
         return repository.findAlertsByEmailAndTimeRange(email, startTime, endTime);
     }

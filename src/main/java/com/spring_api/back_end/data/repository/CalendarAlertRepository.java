@@ -18,8 +18,12 @@ public interface CalendarAlertRepository extends JpaRepository<CalendarAlert, Lo
 
     Optional<CalendarAlert> findByIdAndUserEmailAndIsDeleted(Long id, String userEmail, boolean isDeleted);
 
-    @Query("SELECT ca FROM CalendarAlert ca WHERE ca.alertTime <= :currentTime AND ca.status = :status AND ca.isDeleted = false")
+    @Query(value = "SELECT ca FROM CalendarAlert ca WHERE ca.alertTime <= :currentTime AND ca.status = :status AND ca.isDeleted = false ORDER BY ca.alertTime ASC",
+           nativeQuery = false)
     List<CalendarAlert> findActiveAlertsDueForNotification(@Param("currentTime") LocalDateTime currentTime, @Param("status") AlertStatus status);
+
+    @Query("SELECT COUNT(ca) FROM CalendarAlert ca WHERE ca.alertTime <= :currentTime AND ca.status = :status AND ca.isDeleted = false")
+    long countActiveAlertsDueForNotification(@Param("currentTime") LocalDateTime currentTime, @Param("status") AlertStatus status);
 
     @Query("SELECT ca FROM CalendarAlert ca WHERE ca.userEmail = :email AND ca.alertTime BETWEEN :startTime AND :endTime AND ca.isDeleted = false ORDER BY ca.alertTime ASC")
     List<CalendarAlert> findAlertsByEmailAndTimeRange(@Param("email") String email, @Param("startTime") LocalDateTime startTime, @Param("endTime") LocalDateTime endTime);
